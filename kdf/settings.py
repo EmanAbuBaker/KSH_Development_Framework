@@ -20,6 +20,10 @@ import logging.config
 import logging # must be imported in view.py also.
 from django.utils.log import DEFAULT_LOGGING
 
+# Internationalization
+
+from django.utils.translation import gettext, ngettext
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,6 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware', # For localization and translation settings
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,7 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
+
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -123,6 +130,19 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Here specified the languages we want our project to be available in
+LANGUAGES = (
+    ('en', _('English')),
+    ('fr', _('French')),
+    ('ar', _('Arabic')),
+)
+
+# locale path directory for your application where message files will reside
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
 
 
 # Static files (CSS, JavaScript, Images)

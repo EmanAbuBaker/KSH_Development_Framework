@@ -8,6 +8,6 @@ from django.shortcuts import render
 import os 
 import logging
 # Create a logger for this file or the name of the log level :
-logger = logging.getLogger(__file__)
+#logger = logging.getLogger(__file__)
 # or Get an instance of a logger:
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
