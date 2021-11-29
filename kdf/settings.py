@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
      # Add our new application framework 
     'framework.apps.FrameworkConfig',#This object was created for us in /framework/apps.py added by eman 
+    'rosetta',  # Rosetta Translation Interface
 ]
 
 MIDDLEWARE = [

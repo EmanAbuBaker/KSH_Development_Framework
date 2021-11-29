@@ -26,10 +26,14 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
+# add the i18n_patterns function localization and translation settings
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),    
-    path('framework/', include('framework.urls')),
-    path('', RedirectView.as_view(url='framework/', permanent=True)),
+   #path('framework/', include('framework.urls')),
+   #path('', RedirectView.as_view(url='framework/', permanent=True)),
+   path('rosetta/', include('rosetta.urls')),  # add Rosetta's URL to main URL configuration
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+ ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
