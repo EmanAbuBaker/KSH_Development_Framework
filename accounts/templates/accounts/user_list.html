@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  
+  <h1>Users: </h1>
+ 
+  {% if user_list %}
+  
+  <ul>
+    {% for user in user_list %}
+      <li>
+        <a href="{% url 'user-detail' user.id%}">{{ user.username }} </a>
+
+          <a href=" {% url 'user-update' user.id%} ">  <img src="https://www.iconsdb.com/icons/download/color/8ABDFF/edit-9-16.ico" 
+            alt="update user" style="width:30px;height:20px;">
+            <a href=" {% url 'user-delete' user.id%}  ">  <img src="https://www.iconsdb.com/icons/download/color/87BBFF/delete-16.ico" 
+              alt="delete user" style="width:20px;height:22px;">
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no users in the library.</p>
+  {% endif %}
+    
+{% endblock %}

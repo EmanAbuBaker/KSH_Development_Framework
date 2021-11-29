@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+  <p> <strong>User Name:</strong> {{ user.username}} </p>
+
+  <p> <strong> User Email:</strong> {{ user.email}}</p>
+  
+  <p> <strong> Is Staff:</strong>  {%if  user.is_staff %} Yes {% else %} No {% endif %}</p>
+
+  <p> <strong> Is Active:</strong>  {%if  user.is_active %} Yes {% else %} No {% endif %}</p>
+
+  <p> <strong> Last Login:</strong> {{ user.last_login}}</p>
+
+  <p> <strong> Date Joined:</strong> {{ user.date_joined}}</p>
+
+  <p> <strong> Is SupperUser:</strong>  {%if user.is_superuser %} Yes {% else %} No {% endif %}</p>
+ 
+{% endblock %}

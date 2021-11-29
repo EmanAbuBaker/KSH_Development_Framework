@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-8g-804gv!!s53=a7ahuz#u7pef3#jx@7(r!h1&av=*8f%)a91#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.21.133','localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['192.168.21.133','localhost', '127.0.0.1','192.168.41.136']
 
 
 # Application definition
@@ -46,8 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # configure the accounts app 
+    'accounts.apps.AccountsConfig'
      # Add our new application framework 
-    'framework.apps.FrameworkConfig',#This object was created for us in /framework/apps.py added by eman 
+    #'framework.apps.FrameworkConfig',#This object was created for us in /framework/apps.py added by eman 
+    
 ]
 
 MIDDLEWARE = [
@@ -86,10 +89,15 @@ WSGI_APPLICATION = 'kdf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'KSHdatabase',
+        'USER': 'sittana',
+        'PASSWORD': 'Sittana@123#',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
@@ -180,3 +188,48 @@ LOGGING = {
     },  
 }
 '''
+
+
+
+# LDAP CONFIGRATION START HERE !
+# fist import the needed packages
+import ldap
+from django_auth_ldap.config import LDAPSearch
+from django_auth_ldap.config import ActiveDirectoryGroupType
+
+
+AUTH_LDAP_SERVER_URI = 'ldap://192.168.41.146'
+
+AUTH_LDAP_BIND_DN = "CN=bind,CN=Users,DC=BD,DC=COM"
+AUTH_LDAP_BIND_PASSWORD = "Abc123++"
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+            "dc=BD,dc=COM", ldap.SCOPE_SUBTREE, "sAMAccountName=%(user)s"
+            )
+
+AUTH_LDAP_USER_ATTR_MAP = {
+            "username": "sAMAccountName",
+                "first_name": "givenName",
+                    "last_name": "sn",
+                        "email": "mail",
+}
+
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+            "dc=BD,dc=COM", ldap.SCOPE_SUBTREE, "(objectCategory=Group)"
+            )
+AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType(name_attr="cn")
+AUTH_LDAP_USER_FLAGS_BY_GROUP = {
+            "is_superuser": "CN=django-admin,CN=Users,DC=BD,DC=COM",
+            "is_staff": "CN=django-admin,CN=Users,DC=BD,DC=COM",
+            }
+AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_CACHE_GROUPS = True
+AUTH_LDAP_GROUP_CACHE_TIMEOUT = 1  # 1 hour cache
+
+AUTHENTICATION_BACKENDS = [
+            'django_auth_ldap.backend.LDAPBackend',
+                'django.contrib.auth.backends.ModelBackend',
+]
+
+
+
+# LDAP CONFIGRATION ENDS HERE !
