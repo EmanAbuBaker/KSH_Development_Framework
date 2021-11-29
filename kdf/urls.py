@@ -32,14 +32,11 @@ from django.utils.translation import gettext_lazy as _
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),    
-<<<<<<< HEAD
     path('accounts/', include('accounts.urls')),
     #path('accounts/', include('django.contrib.auth.urls')),
     #path('', RedirectView.as_view(url='accounts/', permanent=True)),
-=======
     #path('framework/', include('framework.urls')),
     #path('', RedirectView.as_view(url='framework/', permanent=True)),
     path('rosetta/', include('rosetta.urls')),  # add Rosetta's URL to main URL configuration
->>>>>>> origin
 
  ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
