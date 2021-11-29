@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     # configure the accounts app 
     'accounts.apps.AccountsConfig'
      # Add our new application framework 
-    #'framework.apps.FrameworkConfig',#This object was created for us in /framework/apps.py added by eman 
+    'framework.apps.FrameworkConfig',#This object was created for us in /framework/apps.py added by eman 
     'rosetta',  # Rosetta Translation Interface
 ]
 
