@@ -29,7 +29,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),    
-    #path('framework/', include('framework.urls')),
-    #path('', RedirectView.as_view(url='framework/', permanent=True)),
+    path('framework/', include('framework.urls')),
+    path('', RedirectView.as_view(url='framework/', permanent=True)),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
