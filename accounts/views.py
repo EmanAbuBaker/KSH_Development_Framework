@@ -28,10 +28,10 @@ from accounts.models import Account
 
 
 # view the list of the users.
-#class usersListView(PermissionRequiredMixin,generic.ListView):
-class usersListView(generic.ListView):
+class usersListView(PermissionRequiredMixin,generic.ListView):
+#class usersListView(generic.ListView):
 
-    #permission_required = 'catalog.can_mark_returned'
+    permission_required = 'catalog.can_mark_returned'
     model = User
     template_name ='accounts/user_list.html'
 

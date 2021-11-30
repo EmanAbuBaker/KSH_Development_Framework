@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-# Use include() to add paths from the catalog application
+# Use include() to add paths from the account application
 from django.urls import include
 
 #Add URL maps to redirect the base URL to our application
@@ -33,10 +33,8 @@ from django.utils.translation import gettext_lazy as _
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),    
     path('accounts/', include('accounts.urls')),
-    #path('accounts/', include('django.contrib.auth.urls')),
-    #path('', RedirectView.as_view(url='accounts/', permanent=True)),
-    #path('framework/', include('framework.urls')),
-    #path('', RedirectView.as_view(url='framework/', permanent=True)),
-    path('rosetta/', include('rosetta.urls')),  # add Rosetta's URL to main URL configuration
+    path('accounts/', include('django.contrib.auth.urls')),
+
+   path('rosetta/', include('rosetta.urls')),  # add Rosetta's URL to main URL configuration
 
  ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
