@@ -218,7 +218,7 @@ from django_auth_ldap.config import LDAPSearch
 from django_auth_ldap.config import ActiveDirectoryGroupType
 
 
-AUTH_LDAP_SERVER_URI = 'ldap://192.168.41.146'
+AUTH_LDAP_SERVER_URI = 'ldap://192.168.41.149'
 
 AUTH_LDAP_BIND_DN = "CN=bind,CN=Users,DC=BD,DC=COM"
 AUTH_LDAP_BIND_PASSWORD = "Abc123++"

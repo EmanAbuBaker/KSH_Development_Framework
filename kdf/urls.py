@@ -35,6 +35,7 @@ urlpatterns = i18n_patterns(
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
+   
    path('rosetta/', include('rosetta.urls')),  # add Rosetta's URL to main URL configuration
 
  ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
