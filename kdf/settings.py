@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 
 from pathlib import Path
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 
 
 #import library to logging configuration : 
@@ -51,11 +55,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # configure the accounts app 
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
      # Add our new application framework 
     #'framework.apps.FrameworkConfig',#This object was created for us in /framework/apps.py added by eman 
-    'rosetta',  # Rosetta Translation Interface
+    #'rosetta',  # Rosetta Translation Interface
+    # Custom for contact application
+    'contact',
+    # 3rd party apps
+    'crispy_forms',
 ]
+
+# Indicates the frontend framework django crispy forms use
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,12 +105,12 @@ WSGI_APPLICATION = 'kdf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'KSHdatabase',
-        'USER': 'sittana',
-        'PASSWORD': 'Sittana@123#',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': env('ENGINE'),
+        'NAME': env('NAME'),
+        'USER': env('USER'),
+        'PASSWORD': env('PASSWORD'),
+        'HOST': env('HOST'),
+        'PORT':env( 'PORT'),
     }
 }
 
@@ -218,10 +229,16 @@ from django_auth_ldap.config import LDAPSearch
 from django_auth_ldap.config import ActiveDirectoryGroupType
 
 
+
+
+
+
+
+#AUTH_LDAP_SERVER_URI = env('AUTH_LDAP_SERVER_URI')
 AUTH_LDAP_SERVER_URI = 'ldap://192.168.41.149'
 
 AUTH_LDAP_BIND_DN = "CN=bind,CN=Users,DC=BD,DC=COM"
-AUTH_LDAP_BIND_PASSWORD = "Abc123++"
+AUTH_LDAP_BIND_PASSWORD = env('AUTH_LDAP_BIND_PASSWORD')
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
             "dc=BD,dc=COM", ldap.SCOPE_SUBTREE, "sAMAccountName=%(user)s"
             )
@@ -253,3 +270,17 @@ AUTHENTICATION_BACKENDS = [
 
 
 # LDAP CONFIGRATION ENDS HERE !
+
+
+
+#Mail service
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail2.sd.zain.com'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =env('EMAIL_HOST_PASSWORD')
+RECIPIENT_ADDRESS=env('RECIPIENT_ADDRESS') 

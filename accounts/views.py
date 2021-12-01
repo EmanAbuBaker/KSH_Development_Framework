@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User, UserManager 
 from django.contrib.auth import login as log_in, get_user, get_user_model
-from django.http import HttpResponseRedirect, request
+from django.http import HttpResponse, request
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic.edit import UpdateView , DeleteView
 from django.urls import reverse
@@ -13,11 +13,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth import get_user, get_user_model, authenticate 
-from django.http import HttpResponseRedirect, request
+from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth import login , get_user, get_user_model
+from django.contrib.auth import  get_user, get_user_model
 from django.shortcuts import redirect
+
 
 #from accounts.forms import RegistrationForm,AccountAuthenticationForm, AccountUpdateForm
 from accounts.models import Account
@@ -56,3 +56,9 @@ class UserUpdate(UpdateView):
 class UserDelete(DeleteView):
     model = User
     success_url = reverse_lazy('user_list')
+
+
+
+def my_view(request):
+    output = _("Welcome to my site.")
+    return HttpResponse(output)
